@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>空中足球計分系統</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="role-selection" id="roleSelection">
+        <div class="role-container">
+            <h2>請選擇角色</h2>
+            <button id="adminBtn" class="role-button">管理員</button>
+            <button id="guestBtn" class="role-button">遊客</button>
+        </div>
+    </div>
+
+    <!-- 添加密碼驗證對話框 -->
+    <div class="password-dialog" id="passwordDialog" style="display: none;">
+        <div class="password-container">
+            <h2>請輸入管理員密碼</h2>
+            <input type="password" id="adminPassword" placeholder="請輸入密碼">
+            <div class="password-buttons">
+                <button id="submitPassword" class="role-button">確認</button>
+                <button id="cancelPassword" class="role-button">取消</button>
+            </div>
+            <p id="passwordError" class="password-error" style="display: none;">密碼錯誤</p>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent" style="display: none;">
+        <div class="container">
+            <h1>空中足球計分系統</h1>
+            
+            <div class="timer-container">
+                <div class="timer-controls">
+                    <button class="time-button" id="decreaseTime">-</button>
+                    <div class="timer-center">
+                        <div class="timer-bar">
+                            <div class="timer-progress"></div>
+                        </div>
+                        <div class="timer-display">03:00</div>
+                        <div class="reset-message" id="resetMessage" style="display: none;">
+                            請刷新頁面以重置比賽
+                        </div>
+                        <div class="timer-buttons">
+                            <button class="reset-button" id="resetTimer">重置時間</button>
+                            <button class="pause-button" id="pauseTimer">暫停</button>
+                            <button class="next-button" id="nextPeriod" style="display: none;">下一節</button>
+                        </div>
+                    </div>
+                    <button class="time-button" id="increaseTime">+</button>
+                </div>
+            </div>
+            
+            <div class="scoring-section">
+                <h2>計分功能</h2>
+                <div class="score-buttons">
+                    <div class="team home">
+                        <input type="text" class="team-name" id="homeTeamName" value="" placeholder="主隊" readonly>
+                        <button id="homeScore">得分</button>
+                        <div class="first-period-score" id="homeFirstPeriodScore" style="display: none;">
+                            第一節得分: <span>0</span>
+                        </div>
+                        <div class="second-period-score" id="homeSecondPeriodScore" style="display: none;">
+                            第二節得分: <span>0</span>
+                        </div>
+                        <div class="total-score" id="homeTotalScore" style="display: none;">
+                            總得分: <span>0</span>
+                        </div>
+                    </div>
+                    <div class="period-container">
+                        <div class="period-display">第 1 節</div>
+                    </div>
+                    <div class="team away">
+                        <input type="text" class="team-name" id="awayTeamName" value="" placeholder="客隊" readonly>
+                        <button id="awayScore">得分</button>
+                        <div class="first-period-score" id="awayFirstPeriodScore" style="display: none;">
+                            第一節得分: <span>0</span>
+                        </div>
+                        <div class="second-period-score" id="awaySecondPeriodScore" style="display: none;">
+                            第二節得分: <span>0</span>
+                        </div>
+                        <div class="total-score" id="awayTotalScore" style="display: none;">
+                            總得分: <span>0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="display-section">
+                <h2>比分顯示</h2>
+                <button class="reset-button" id="resetScore">重置分數</button>
+                <div class="team-labels">
+                    <span class="team-label">主隊</span>
+                    <span class="team-label">客隊</span>
+                </div>
+                <div class="score-display">
+                    <div class="team home">
+                        <div class="marquee" id="homeScoreDisplay">0</div>
+                    </div>
+                    <div class="team away">
+                        <div class="marquee" id="awayScoreDisplay">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="score">0</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

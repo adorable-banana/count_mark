@@ -1,0 +1,492 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.scoring-section, .display-section {
+    margin-bottom: 40px;
+}
+
+.score-buttons, .score-display {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.team {
+    text-align: center;
+    flex: 1;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.marquee {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    font-size: 3em;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* 響應式設計 */
+@media (max-width: 600px) {
+    .score-buttons, .score-display {
+        flex-direction: column;
+    }
+    
+    .team {
+        margin-bottom: 20px;
+    }
+}
+
+/* 修改 timer-container 樣式 */
+.timer-container {
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.timer-bar {
+    margin-bottom: 30px;
+    width: 100%;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.timer-progress {
+    width: 100%;
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 1s linear;
+}
+
+.timer-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    z-index: 1;
+}
+
+/* 修改重置按鈕樣式，使其適用於所有重置按鈕 */
+.timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: calc(10px + 1em); /* 原來的 10px 加上 1em */
+}
+
+/* 或者直接設置按鈕的 margin-top */
+.reset-button, .pause-button {
+    margin-top: 1em;
+}
+
+.reset-button, .next-button, .pause-button {
+    padding: 8px 20px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1em;
+}
+
+.reset-button {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.next-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.reset-button:hover {
+    background-color: #ff5252;
+}
+
+.next-button:hover {
+    background-color: #45a049;
+}
+
+.display-section {
+    margin-bottom: 40px;
+    text-align: center; /* 讓重置按鈕置中 */
+}
+
+.score-display {
+    margin-top: 10px; /* 在分數顯示和重置按鈕之間添加間距 */
+}
+
+.timer-controls {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.timer-center {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.time-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ff4444;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.time-button:hover {
+    background-color: #ff0000;
+}
+
+.timer-bar.timeout {
+    background-color: #ffebee; /* 淺紅色背景 */
+}
+
+.timer-progress.timeout {
+    background-color: #ff4444; /* 紅色進度條 */
+}
+
+.timer-display.timeout {
+    color: #ff4444;
+    font-size: 2em;
+}
+
+.period-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.period-display {
+    text-align: center;
+    color: #333;
+    font-size: 4em; /* 從 2em 改為 4em */
+    font-weight: bold;
+    margin: 10px 0;
+    min-width: 120px;
+}
+
+.period-display.end {
+    color: #ff4444;
+    font-size: 4em; /* 確保結束時也保持相同大小 */
+}
+
+/* 調整得分按鈕區域的布局 */
+.score-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 確保主隊和客隊區域大小一致 */
+.team {
+    flex: 1;
+    text-align: center;
+}
+
+.time-button.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.time-button.disabled:hover {
+    background-color: #cccccc;
+}
+
+.pause-button {
+    padding: 8px 20px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #ffa500; /* 橙色 */
+    color: white;
+}
+
+.pause-button:hover {
+    background-color: #ff8c00;
+}
+
+.pause-button.paused {
+    background-color: #4CAF50; /* 暫停時變為綠色 */
+}
+
+.pause-button.paused:hover {
+    background-color: #45a049;
+}
+
+button.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+button.disabled:hover {
+    background-color: #cccccc;
+}
+
+.first-period-score,
+.second-period-score,
+.total-score {
+    margin-top: 10px;
+    color: #666;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.first-period-score span,
+.second-period-score span,
+.total-score span {
+    display: block;
+    margin-top: 5px;
+    color: #333; /* 將分數改為黑色 */
+}
+
+.second-period-score {
+    color: #4CAF50; /* 綠色 */
+}
+
+.total-score {
+    color: #ff4444; /* 紅色 */
+    margin-top: 15px;
+}
+
+.reset-message {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    font-weight: bold;
+    position: fixed;
+    left: 50%;
+    top: 60%; /* 改用 top 來定位，設為 60% 讓它在中間偏下 */
+    transform: translate(-50%, -50%); /* 修改 transform 使文字完全置中 */
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0; /* 保留內邊距以維持間距 */
+}
+
+.role-selection {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.role-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.role-container h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.role-button {
+    padding: 15px 40px;
+    margin: 0 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#adminBtn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#guestBtn {
+    background-color: #2196F3;
+    color: white;
+}
+
+.role-button:hover {
+    opacity: 0.9;
+}
+
+/* 遊客模式下隱藏的元素 */
+.guest-hidden {
+    display: none !important;
+}
+
+/* 遊客模式下的計時器位置調整 */
+.guest-mode .timer-container {
+    margin-top: -40px; /* 向上移動 */
+}
+
+/* 遊客模式下的倒計時字體位置調整 */
+.guest-mode .timer-display {
+    margin-top: 1em; /* 向下移動 1em */
+}
+
+/* 遊客模式下的節數顯示位置調整 */
+.guest-mode .period-display {
+    margin-top: -20px; /* 向上移動 */
+}
+
+/* 遊客模式下的比分顯示調整 */
+.guest-mode .score-display {
+    margin-top: 20px;
+}
+
+/* 修改主隊和客隊標題的樣式 */
+.team h3 {
+    display: none;
+}
+
+/* 隊名輸入框樣式 */
+.team-name {
+    font-size: 2.5em;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: #333;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 15px;
+    cursor: default;
+}
+
+/* 管理員模式下的輸入框樣式 */
+.team-name.editable {
+    border-bottom: 2px solid #4CAF50;
+    cursor: text;
+}
+
+.team-name.editable:focus {
+    outline: none;
+    border-bottom-color: #45a049;
+}
+
+/* 隊伍標籤容器 */
+.team-labels {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5px;
+    padding: 0 20px;
+}
+
+/* 隊伍標籤文字 */
+.team-label {
+    font-size: 2em;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 密碼驗證對話框樣式 */
+.password-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.password-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.password-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.password-container input {
+    width: 200px;
+    padding: 10px;
+    margin: 10px 0 20px;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.password-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.password-error {
+    color: #ff4444;
+    margin-top: 10px;
+    font-weight: bold;
+}
